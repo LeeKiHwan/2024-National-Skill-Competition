@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class NoteManager : MonoBehaviour
 {
+    public static NoteManager Instance;
+
     public KeyCode leftGround;
     public KeyCode leftCenterGround;
     public KeyCode rightCenterGround;
@@ -18,80 +20,52 @@ public class NoteManager : MonoBehaviour
 
     public int combo;
 
-    private void Update()
+    public int hp;
+    public int groundEnergy;
+    public int skyEnergy;
+
+    public int missDefense;
+
+    public bool isDie;
+
+    private void Awake()
     {
-        HitNote();
+        Instance = this;
     }
 
-    public void HitNote()
+    public void AddGroundEnergy(int energy)
     {
-        float x = 0;
-        NotePositionType notePositionType = NotePositionType.Ground;
+        if (groundEnergy + energy < 100) groundEnergy += energy;
+        else groundEnergy = 100;
+    }
 
-        if (Input.GetKeyDown(leftGround))
-        {
-            x = -3;
-            notePositionType = NotePositionType.Ground;
-        }
-        if (Input.GetKeyDown(leftCenterGround))
-        {
-            x = -1;
-            notePositionType = NotePositionType.Ground;
-        }
-        if (Input.GetKeyDown(rightCenterGround))
-        {
-            x = 1;
-            notePositionType = NotePositionType.Ground;
-        }
-        if (Input.GetKeyDown(rightGround))
-        {
-            x = 3;
-            notePositionType = NotePositionType.Ground;
-        }
+    public void AddSkyEnergy(int energy)
+    {
+        if (skyEnergy + energy < 100) skyEnergy += energy;
+        else skyEnergy = 100;
+    }
 
-        if (Input.GetKeyDown(leftSky))
-        {
-            x = -3;
-            notePositionType = NotePositionType.Sky;
-        }
-        if (Input.GetKeyDown(leftCenterSky))
-        {
-            x = -1;
-            notePositionType = NotePositionType.Sky;
-        }
-        if (Input.GetKeyDown(rightCenterSky))
-        {
-            x = 1;
-            notePositionType = NotePositionType.Sky;
-        }
-        if (Input.GetKeyDown(rightSky))
-        {
-            x = 3;
-            notePositionType = NotePositionType.Sky;
-        }
+    public void TakeHeal(int heal)
+    {
+        if (hp + heal < 100) hp += heal;
+        else hp = 100;
+    }
 
-        if (x != 0)
+    public void TakeDamage(int damage)
+    {
+        if (hp - damage > 0) hp -= damage;
+        else
         {
-            RaycastHit hit;
-            Physics.Raycast(new Vector3(x, 0, -0.8f), Vector3.forward, out hit, 1.6f, LayerMask.GetMask("Note"));
-
-            if (hit.collider != null)
-            {
-                hit.collider.GetComponent<Note>().HitNote(notePositionType);
-            }
-            else
-            {
-
-            }
+            hp = 0;
+            Die();
         }
     }
 
-    private void OnDrawGizmos()
+    public void Die()
     {
-        Gizmos.color = Color.yellow;
-        for (int i = -3; i<=3; i+=2)
+        if (!isDie)
         {
-            Gizmos.DrawRay(new Vector3(i, 0, -0.8f), Vector3.forward * 1.6f);
+            isDie = true;
         }
     }
 }

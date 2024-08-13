@@ -4,42 +4,65 @@ using UnityEngine;
 
 public abstract class Note : MonoBehaviour
 {
-    public float noteZ;
     public NoteXPosition noteXPosition;
+    public KeyCode hitKey;
+    public bool hitActivate;
+    public RectTransform rect;
 
-    private float speed = 1;
-
-    public virtual void Awake()
+    public virtual void Start()
     {
+        rect = GetComponent<RectTransform>();
+
         switch (noteXPosition)
         {
             case NoteXPosition.Left:
-                transform.position = new Vector3(-3, 0, noteZ);
-                break; 
-            case NoteXPosition.CenterLeft:
-                transform.position = new Vector3(-1, 0, noteZ);
+                rect.anchoredPosition = new Vector2(-225, rect.anchoredPosition.y);
                 break;
-            case NoteXPosition.CenterRight:
-                transform.position = new Vector3(1, 0, noteZ);
+            case NoteXPosition.LeftCenter:
+                rect.anchoredPosition = new Vector2(-75, rect.anchoredPosition.y);
+                break;
+            case NoteXPosition.RightCenter:
+                rect.anchoredPosition = new Vector2(75, rect.anchoredPosition.y);
                 break;
             case NoteXPosition.Right:
-                transform.position = new Vector3(3, 0, noteZ);
+                rect.anchoredPosition = new Vector2(225, rect.anchoredPosition.y);
                 break;
         }
     }
 
     public virtual void Update()
     {
-        transform.Translate(Vector3.back * speed * Time.deltaTime);
+        transform.Translate(Vector3.down * Time.deltaTime * 100);
+
+        if (hitActivate && Input.GetKeyDown(hitKey))
+        {
+            HitNote();
+        }
     }
 
-    public abstract void HitNote(NotePositionType notePositionType);
+    public abstract void HitNote();
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Activator"))
+        {
+            hitActivate = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Activator"))
+        {
+            hitActivate = false;
+        }
+    }
 }
 
 public enum NoteXPosition
 {
     Left,
-    CenterLeft,
-    CenterRight,
+    LeftCenter,
+    RightCenter,
     Right
 }
