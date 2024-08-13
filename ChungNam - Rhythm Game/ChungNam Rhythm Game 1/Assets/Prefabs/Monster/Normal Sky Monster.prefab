@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7719048409722520804}
   - component: {fileID: 7512818004556777115}
   m_Layer: 7
-  m_Name: NormalMonster
+  m_Name: Normal Sky Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,4 +149,4 @@ MonoBehaviour:
   hp: 1
   speed: 2
   addSpeed: 0
-  positionType: 0
+  positionType: 1

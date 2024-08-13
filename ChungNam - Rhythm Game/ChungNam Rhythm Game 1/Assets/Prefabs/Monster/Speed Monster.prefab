@@ -150,7 +150,7 @@ MonoBehaviour:
   hp: 4
   speed: 3
   addSpeed: 0
-  positionType: 0
+  positionType: 1
 --- !u!1 &4885611867648151542
 GameObject:
   m_ObjectHideFlags: 0

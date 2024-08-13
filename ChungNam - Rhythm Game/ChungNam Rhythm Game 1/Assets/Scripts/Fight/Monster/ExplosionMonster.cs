@@ -17,7 +17,7 @@ public class ExplosionMonster : Monster
 
             foreach (Collider col in cols)
             {
-                if (col.GetComponent<Monster>() != null)
+                if (col.GetComponent<Monster>() != null && col.GetComponent<Monster>().positionType == PositionType.Ground)
                 {
                     col.GetComponent<Monster>().TakeDamage();
                 }

@@ -32,11 +32,11 @@ public class Monster : MonoBehaviour
         }
     }
 
-    public IEnumerator Stop()
+    public IEnumerator Stop(float time = 0.5f)
     {
         float baseSpeed = speed;
         speed = 0;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(time);
         speed = baseSpeed;
 
         yield break;
@@ -47,6 +47,7 @@ public class Monster : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             NoteManager.Instance.TakeDamage(hp);
+            Destroy(gameObject);
         }
 
         if (other.CompareTag("SpeedUp"))

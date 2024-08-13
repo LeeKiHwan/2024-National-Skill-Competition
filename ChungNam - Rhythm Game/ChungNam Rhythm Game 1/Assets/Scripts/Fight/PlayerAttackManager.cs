@@ -34,16 +34,17 @@ public class PlayerAttackManager : MonoBehaviour
                     if (monsters[i].GetComponent<Monster>().positionType == PositionType.Ground && NoteManager.Instance.groundEnergy > 0)
                     {
                         NoteManager.Instance.groundEnergy--;
+                        Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>().target = monsters[i].gameObject;
                     }
                     else if (monsters[i].GetComponent<Monster>().positionType == PositionType.Sky && NoteManager.Instance.skyEnergy > 0)
                     {
                         NoteManager.Instance.skyEnergy--;
+                        Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>().target = monsters[i].gameObject;
                     }
-                    Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>().target = monsters[i].gameObject;
                 }
             }
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2 - (NoteManager.Instance.timer ? 1 : 0));
         }
     }
 

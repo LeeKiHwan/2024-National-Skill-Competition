@@ -9,13 +9,20 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    [Header("Text")]
     public TextMeshProUGUI comboText;
     public TextMeshProUGUI hitTypeText;
     public TextMeshProUGUI hitAccuracyText;
 
+    [Header("Image")]
     public Image hpImage;
     public Image groundEnergyImage;
     public Image skyEnergyImage;
+
+    [Header("Skill")]
+    public GameObject cloud;
+    public Transform cloudParent;
+    public GameObject noteUI;
 
     private void Awake()
     {
@@ -40,4 +47,26 @@ public class UIManager : MonoBehaviour
         comboText.text = NoteManager.Instance.combo.ToString();
     }
 
+    public IEnumerator SpawnCloud()
+    {
+        int rand = Random.Range(2, 6);
+
+        for (int i=0; i<rand; i++)
+        {
+            GameObject c = Instantiate(cloud, cloudParent);
+            c.transform.localPosition = Vector2.zero + new Vector2(Random.Range(-250f, 250f), Random.Range(-100, 100));
+            Destroy(c, 0.5f);
+        }
+
+        yield break;
+    }
+
+    public IEnumerator Reverse()
+    {
+        noteUI.transform.localEulerAngles = new Vector3(0, 0, 180);
+        yield return new WaitForSeconds(5);
+        noteUI.transform.localEulerAngles = new Vector3(0, 0, 0);
+
+        yield break;
+    }
 }

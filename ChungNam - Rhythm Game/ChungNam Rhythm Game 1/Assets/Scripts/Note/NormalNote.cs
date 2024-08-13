@@ -7,7 +7,7 @@ public class NormalNote : Note
 {
     public NoteType noteType;
     public PositionType notePositionType;
-
+    
     public override void Start()
     {
         base.Start();
@@ -35,6 +35,9 @@ public class NormalNote : Note
 
         if (noteType == NoteType.Stealth) StartCoroutine(Stealth());
         if (noteType == NoteType.Size) StartCoroutine(Size());
+
+        if (notePositionType == PositionType.Ground) GetComponent<Image>().color = Color.yellow;
+        else GetComponent<Image>().color = Color.cyan;
     }
 
     public override void HitNote()
@@ -42,10 +45,12 @@ public class NormalNote : Note
         int hitAccuracy = 100 - (int)Mathf.Abs(rect.anchoredPosition.y);
         int energy = 0;
 
-        if (hitAccuracy >= 75)
+        if (hitAccuracy >= 75 || NoteManager.Instance.perfect)
         {
             NoteManager.Instance.combo++;
             energy = 2;
+
+            if (NoteManager.Instance.perfect) hitAccuracy = 100;
         }
         else if (hitAccuracy >= 20)
         {
@@ -105,7 +110,7 @@ public class NormalNote : Note
 
         while (true)
         {
-            if (rect.anchoredPosition.y < 150)
+            if (rect.anchoredPosition.y < 150 && !NoteManager.Instance.ghostSkill)
             {
                 image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + Time.deltaTime);
             }

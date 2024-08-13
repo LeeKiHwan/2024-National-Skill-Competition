@@ -41,6 +41,10 @@ public class ItemNote : Note
         {
             HitNote();
         }
+        if (NoteManager.Instance.ghostSkill && rect.anchoredPosition.y < 150)
+        {
+            HideNote();
+        }
     }
 
     public override void HitNote()
@@ -51,15 +55,23 @@ public class ItemNote : Note
                 NoteManager.Instance.TakeHeal(50);
                 break;
             case ItemType.Stop:
+                Monster[] monsters = FindObjectsOfType<Monster>();
+                foreach (Monster monster in monsters)
+                {
+                    StartCoroutine(monster.Stop(2));
+                }
                 break;
             case ItemType.Energy:
+                StartCoroutine(NoteManager.Instance.EnergyDouble());
                 break;
             case ItemType.Miss:
                 NoteManager.Instance.missDefense += 2;
                 break;
             case ItemType.Timer:
+                StartCoroutine(NoteManager.Instance.Timer());
                 break;
             case ItemType.Perfect:
+                StartCoroutine(NoteManager.Instance.Perfect());
                 break;
         }
         Destroy(gameObject);
