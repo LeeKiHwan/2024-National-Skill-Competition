@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6532878246281606755
+--- !u!1 &680581066390408519
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4705186545388863403}
-  - component: {fileID: 5688290648033060711}
-  - component: {fileID: 9165449008070847461}
-  - component: {fileID: 2687955250227795486}
-  - component: {fileID: 7719048409722520804}
-  - component: {fileID: 7512818004556777115}
-  m_Layer: 0
-  m_Name: NormalMonster
+  - component: {fileID: 2694517519182720472}
+  - component: {fileID: 6179713198567791395}
+  - component: {fileID: 2144063201838406994}
+  - component: {fileID: 1302347891726117859}
+  - component: {fileID: 8139553397718841841}
+  - component: {fileID: 2393906251031422394}
+  m_Layer: 7
+  m_Name: Heal Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4705186545388863403
+--- !u!4 &2694517519182720472
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6532878246281606755}
+  m_GameObject: {fileID: 680581066390408519}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 34.4}
+  m_LocalPosition: {x: 0.02, y: 0.5, z: 42.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5688290648033060711
+--- !u!33 &6179713198567791395
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6532878246281606755}
+  m_GameObject: {fileID: 680581066390408519}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &9165449008070847461
+--- !u!23 &2144063201838406994
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6532878246281606755}
+  m_GameObject: {fileID: 680581066390408519}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -86,13 +86,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2687955250227795486
+--- !u!65 &1302347891726117859
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6532878246281606755}
+  m_GameObject: {fileID: 680581066390408519}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -107,13 +107,13 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &7719048409722520804
+--- !u!54 &8139553397718841841
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6532878246281606755}
+  m_GameObject: {fileID: 680581066390408519}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -132,20 +132,21 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &7512818004556777115
+--- !u!114 &2393906251031422394
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6532878246281606755}
+  m_GameObject: {fileID: 680581066390408519}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e38542b59749184a9acf0b9455cde6e, type: 3}
+  m_Script: {fileID: 11500000, guid: af01f798d63b1444e89ba4d1a59ae399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  hp: 4
   speed: 2
   addSpeed: 0
+  positionType: 0

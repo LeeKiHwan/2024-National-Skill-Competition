@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class NormalNote : Note
 {
     public NoteType noteType;
-    public NotePositionType notePositionType;
+    public PositionType notePositionType;
 
     public override void Start()
     {
@@ -14,22 +14,22 @@ public class NormalNote : Note
 
         if (noteXPosition == NoteXPosition.Left)
         {
-            if (notePositionType == NotePositionType.Ground) hitKey = NoteManager.Instance.leftGround;
+            if (notePositionType == PositionType.Ground) hitKey = NoteManager.Instance.leftGround;
             else hitKey = NoteManager.Instance.leftSky;
         }
         if (noteXPosition == NoteXPosition.LeftCenter)
         {
-            if (notePositionType == NotePositionType.Ground) hitKey = NoteManager.Instance.leftCenterGround;
+            if (notePositionType == PositionType.Ground) hitKey = NoteManager.Instance.leftCenterGround;
             else hitKey = NoteManager.Instance.leftCenterSky;
         } 
         if (noteXPosition == NoteXPosition.RightCenter)
         {
-            if (notePositionType == NotePositionType.Ground) hitKey = NoteManager.Instance.rightCenterGround;
+            if (notePositionType == PositionType.Ground) hitKey = NoteManager.Instance.rightCenterGround;
             else hitKey = NoteManager.Instance.rightCenterSky;
         }
         if (noteXPosition == NoteXPosition.Right)
         {
-            if (notePositionType == NotePositionType.Ground) hitKey = NoteManager.Instance.rightGround;
+            if (notePositionType == PositionType.Ground) hitKey = NoteManager.Instance.rightGround;
             else hitKey = NoteManager.Instance.rightSky;
         }
 
@@ -77,7 +77,7 @@ public class NormalNote : Note
                 break;
         }
 
-        if (notePositionType == NotePositionType.Ground)
+        if (notePositionType == PositionType.Ground)
         {
             NoteManager.Instance.AddGroundEnergy(energy);
             if (NoteManager.Instance.combo % 2 == 0)
@@ -85,7 +85,7 @@ public class NormalNote : Note
                 NoteManager.Instance.AddSkyEnergy(1);
             }
         }
-        else if (notePositionType == NotePositionType.Sky)
+        else if (notePositionType == PositionType.Sky)
         {
             NoteManager.Instance.AddSkyEnergy(energy);
             if (NoteManager.Instance.combo % 2 == 0)
@@ -142,7 +142,7 @@ public enum NoteType
     Size
 }
 
-public enum NotePositionType
+public enum PositionType
 {
     Ground,
     Sky

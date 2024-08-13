@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Monster : MonoBehaviour
 {
     public int hp;
     public float speed;
     public float addSpeed;
+    public PositionType positionType;
+
+    private void Awake()
+    {
+        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+        transform.LookAt(player);
+    }
 
     public virtual void Update()
     {

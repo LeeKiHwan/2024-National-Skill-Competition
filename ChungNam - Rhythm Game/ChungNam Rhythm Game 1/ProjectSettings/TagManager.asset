@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Activator
   - Note
+  - SpeedUp
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - Water
   - UI
   - Note
-  - 
+  - Monster
   - 
   - 
   - 
