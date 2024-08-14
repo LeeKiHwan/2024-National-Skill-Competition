@@ -36,4 +36,20 @@ public class Boss : Monster
             yield return new WaitForSeconds(skillCool);
         }
     }
+
+    public override void TakeDamage()
+    {
+        hp--;
+        StartCoroutine(Stop());
+
+        if (hp <= 0)
+        {
+            if (!isStageBoss)
+            {
+                StartCoroutine(MonsterSpawner.Instance.StageBossSpawn());
+                MonsterSpawner.Instance.disableSpawn = false;
+            }
+            Destroy(gameObject);
+        }
+    }
 }

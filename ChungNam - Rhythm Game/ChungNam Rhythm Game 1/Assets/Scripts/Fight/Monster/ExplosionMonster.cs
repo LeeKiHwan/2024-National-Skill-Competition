@@ -13,13 +13,16 @@ public class ExplosionMonster : Monster
         {
             // 이펙트 추가 필요
 
-            Collider[] cols = Physics.OverlapSphere(transform.position, 1.5f);
+            Collider[] cols = Physics.OverlapSphere(transform.position, 1.5f, LayerMask.GetMask("Monster"));
 
             foreach (Collider col in cols)
             {
-                if (col.GetComponent<Monster>() != null && col.GetComponent<Monster>().positionType == PositionType.Ground)
+                if (col.GetComponent<Monster>().positionType == PositionType.Ground)
                 {
-                    col.GetComponent<Monster>().TakeDamage();
+                    if (col.transform != transform)
+                    {
+                        col.GetComponent<Monster>().TakeDamage();
+                    }
                 }
             }
 

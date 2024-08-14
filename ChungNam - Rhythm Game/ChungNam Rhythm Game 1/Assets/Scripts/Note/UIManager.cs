@@ -24,6 +24,11 @@ public class UIManager : MonoBehaviour
     public Transform cloudParent;
     public GameObject noteUI;
 
+    [Header("Monster Spawn")]
+    public Transform spawnTextParent;
+    public GameObject spawnText;
+    public Text bossSpawnText;
+
     private void Awake()
     {
         Instance = this;
@@ -45,6 +50,30 @@ public class UIManager : MonoBehaviour
         hitAccuracyText.text = hitAccuracy + "%";
 
         comboText.text = NoteManager.Instance.combo.ToString();
+    }
+
+    public void AddSpawnText(int line)
+    {
+        Text t = Instantiate(spawnText, spawnTextParent).GetComponent<Text>();
+        t.text = line + "번 지역의 몬스터 출현!";
+
+        if (spawnTextParent.childCount > 4)
+        {
+            Destroy(spawnTextParent.GetChild(0).gameObject);
+        }
+    }
+
+    public IEnumerator BossSpawnText(string boss, int sec)
+    {
+        for (int i=sec; i>0; i++)
+        {
+            bossSpawnText.text = i + "초 뒤, " + boss + " 등장";
+            yield return new WaitForSeconds(1);
+        }
+
+        bossSpawnText.text = "";
+
+        yield break;
     }
 
     public IEnumerator SpawnCloud()

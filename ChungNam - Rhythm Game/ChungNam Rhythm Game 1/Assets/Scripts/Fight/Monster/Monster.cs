@@ -50,7 +50,7 @@ public class Monster : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (other.CompareTag("SpeedUp"))
+        if (other.CompareTag("SpeedUp") && positionType == PositionType.Sky)
         {
             addSpeed = speed * 0.5f;
         }
@@ -58,7 +58,7 @@ public class Monster : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("SpeedUp"))
+        if (other.CompareTag("SpeedUp") && positionType == PositionType.Sky)
         {
             addSpeed = 0;
         }
