@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1987368666382286061}
   - component: {fileID: 365521115306740189}
   - component: {fileID: 3783590233316836204}
-  - component: {fileID: 5315322130393461780}
+  - component: {fileID: 7342613606502005019}
   m_Layer: 7
   m_Name: Speed Monster
   m_TagString: Untagged
@@ -115,7 +115,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &5315322130393461780
+--- !u!114 &7342613606502005019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,12 +124,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 99877692653253975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e38542b59749184a9acf0b9455cde6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3177d9f77697950488522e5e69a46368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 4
   speed: 1
-  addSpeed: 0
   positionType: 1
 --- !u!1 &1585102811139176113
 GameObject:

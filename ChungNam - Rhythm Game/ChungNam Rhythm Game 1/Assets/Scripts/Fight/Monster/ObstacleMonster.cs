@@ -6,15 +6,10 @@ public class ObstacleMonster : Monster
 {
     public GameObject obstacle;
 
-    public override void TakeDamage()
+    public override void Die()
     {
-        hp--;
-        StartCoroutine(Stop());
+        Destroy(Instantiate(obstacle, transform.position, Quaternion.identity), 10);
 
-        if (hp <= 0)
-        {
-            Instantiate(obstacle, transform.position, Quaternion.identity);
-            Destroy(gameObject);
-        }
+        base.Die();
     }
 }

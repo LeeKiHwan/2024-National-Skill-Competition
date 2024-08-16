@@ -6,18 +6,13 @@ public class SplitMonster : Monster
 {
     public GameObject childMonster;
 
-    public override void TakeDamage()
+    public override void Die()
     {
-        hp--;
-        StartCoroutine(Stop());
+        Instantiate(childMonster, transform.position + new Vector3(1.5f, 1.5f), Quaternion.identity);
+        Instantiate(childMonster, transform.position + new Vector3(-1.5f, 1.5f), Quaternion.identity);
+        Instantiate(childMonster, transform.position + new Vector3(1.5f, -1.5f), Quaternion.identity);
+        Instantiate(childMonster, transform.position + new Vector3(-1.5f, -1.5f), Quaternion.identity);
 
-        if (hp <= 0)
-        {
-            for (int i=0; i<4; i++)
-            {
-                Instantiate(childMonster, transform.position, Quaternion.identity);
-            }
-            Destroy(gameObject);
-        }
+        base.Die();
     }
 }

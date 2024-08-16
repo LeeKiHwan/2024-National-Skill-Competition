@@ -21,7 +21,7 @@ public class MonsterSpawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(MonsterSpawn());
-        MiddleBossSpawn();
+        StartCoroutine(MiddleBossSpawn());
     }
 
     public IEnumerator MonsterSpawn()
@@ -73,7 +73,12 @@ public class MonsterSpawner : MonoBehaviour
         yield break;
     }
 
-    public IEnumerator StageBossSpawn()
+    public void StageBossSpawn()
+    {
+        StartCoroutine(StageBossSpawnCoroutine());
+    }
+
+    public IEnumerator StageBossSpawnCoroutine()
     {
         yield return new WaitForSeconds(20);
         StartCoroutine(UIManager.Instance.BossSpawnText("스테이지 보스", 20));

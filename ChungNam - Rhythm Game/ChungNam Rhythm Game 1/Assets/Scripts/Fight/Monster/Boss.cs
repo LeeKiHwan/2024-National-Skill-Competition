@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Boss : Monster
 {
@@ -37,19 +38,19 @@ public class Boss : Monster
         }
     }
 
-    public override void TakeDamage()
+    public override void Die()
     {
-        hp--;
-        StartCoroutine(Stop());
-
-        if (hp <= 0)
+        if (!isStageBoss)
         {
-            if (!isStageBoss)
-            {
-                StartCoroutine(MonsterSpawner.Instance.StageBossSpawn());
-                MonsterSpawner.Instance.disableSpawn = false;
-            }
-            Destroy(gameObject);
+            MonsterSpawner.Instance.StageBossSpawn();
+            MonsterSpawner.Instance.disableSpawn = false;
         }
+        else
+        {
+            RankManager.stage1Rank.Add(new RankInfo() { Name = "LKH", Score = NoteManager.Instance.combo * 100 });
+            SceneManager.LoadScene("Menu");
+        }
+
+        base.Die();
     }
 }

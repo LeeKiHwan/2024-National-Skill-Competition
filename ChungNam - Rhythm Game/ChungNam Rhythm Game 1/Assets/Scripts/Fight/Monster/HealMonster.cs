@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class HealMonster : Monster
 {
-    public override void TakeDamage()
-    {
-        hp--;
-        StartCoroutine(Stop());
 
-        if (hp <= 0)
-        {
-            NoteManager.Instance.TakeHeal(NoteManager.Instance.hp / 2);
-            Destroy(gameObject);
-        }
+    public override void Die()
+    {
+        NoteManager.Instance.TakeHeal(NoteManager.Instance.hp / 2);
+        base.Die();
     }
 }

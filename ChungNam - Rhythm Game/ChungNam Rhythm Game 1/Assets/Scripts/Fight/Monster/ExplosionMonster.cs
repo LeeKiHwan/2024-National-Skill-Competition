@@ -4,29 +4,21 @@ using UnityEngine;
 
 public class ExplosionMonster : Monster
 {
-    public override void TakeDamage()
+    public override void Die()
     {
-        hp--;
-        StartCoroutine(Stop());
+        Collider[] cols = Physics.OverlapSphere(transform.position, 1.5f, LayerMask.GetMask("Monster"));
 
-        if (hp <= 0)
+        foreach (Collider col in cols)
         {
-            // 이펙트 추가 필요
-
-            Collider[] cols = Physics.OverlapSphere(transform.position, 1.5f, LayerMask.GetMask("Monster"));
-
-            foreach (Collider col in cols)
+            if (col.GetComponent<Monster>().positionType == PositionType.Ground)
             {
-                if (col.GetComponent<Monster>().positionType == PositionType.Ground)
+                if (col.transform != transform)
                 {
-                    if (col.transform != transform)
-                    {
-                        col.GetComponent<Monster>().TakeDamage();
-                    }
+                    col.GetComponent<Monster>().TakeDamage();
                 }
             }
-
-            Destroy(gameObject);
         }
+
+        base.Die();
     }
 }

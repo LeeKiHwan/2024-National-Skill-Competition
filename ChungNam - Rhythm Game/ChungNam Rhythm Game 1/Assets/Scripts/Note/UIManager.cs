@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -65,7 +64,7 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator BossSpawnText(string boss, int sec)
     {
-        for (int i=sec; i>0; i++)
+        for (int i=sec; i>0; i--)
         {
             bossSpawnText.text = i + "초 뒤, " + boss + " 등장";
             yield return new WaitForSeconds(1);

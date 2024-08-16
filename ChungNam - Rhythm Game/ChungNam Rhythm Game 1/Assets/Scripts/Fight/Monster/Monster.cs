@@ -7,29 +7,34 @@ public class Monster : MonoBehaviour
 {
     public int hp;
     public float speed;
-    public float addSpeed;
+    Transform player;
     public PositionType positionType;
 
     private void Awake()
     {
-        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
-        transform.LookAt(player);
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     public virtual void Update()
     {
-        transform.Translate(Vector3.forward * (speed + addSpeed) * Time.deltaTime);
+        transform.LookAt(player);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    public virtual void TakeDamage()
+    public void TakeDamage()
     {
         hp--;
         StartCoroutine(Stop());
 
         if (hp <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    public virtual void Die()
+    {
+        Destroy(gameObject);
     }
 
     public IEnumerator Stop(float time = 0.5f)
@@ -47,20 +52,7 @@ public class Monster : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             NoteManager.Instance.TakeDamage(hp);
-            Destroy(gameObject);
-        }
-
-        if (other.CompareTag("SpeedUp") && positionType == PositionType.Sky)
-        {
-            addSpeed = speed * 0.5f;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("SpeedUp") && positionType == PositionType.Sky)
-        {
-            addSpeed = 0;
+            Die();
         }
     }
 }
