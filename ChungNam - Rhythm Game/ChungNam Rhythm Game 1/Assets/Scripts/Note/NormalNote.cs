@@ -99,6 +99,9 @@ public class NormalNote : Note
             }
         }
 
+        NoteManager.Instance.noteCount++;
+        NoteManager.Instance.noteSuccess += hitAccuracy;
+
         UIManager.Instance.UpdateNoteUI(hitAccuracy);
         Destroy(gameObject);
     }

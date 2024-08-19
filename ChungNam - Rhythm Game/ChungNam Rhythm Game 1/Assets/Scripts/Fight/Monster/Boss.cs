@@ -47,8 +47,15 @@ public class Boss : Monster
         }
         else
         {
-            RankManager.stage1Rank.Add(new RankInfo() { Name = "LKH", Score = NoteManager.Instance.combo * 100 });
-            SceneManager.LoadScene("Menu");
+            ResultManager.stage = SceneManager.GetActiveScene().name == "Stage1" ? 1 : 2;
+            ResultManager.score = NoteManager.Instance.noteCount * 1500 + NoteManager.Instance.monsterCount * 1000;
+            ResultManager.time = NoteManager.Instance.time;
+            ResultManager.itemCount = NoteManager.Instance.itemCount;
+            ResultManager.noteCount = NoteManager.Instance.noteCount;
+            ResultManager.noteSuccess = NoteManager.Instance.noteSuccess;
+            ResultManager.monsterCount = NoteManager.Instance.monsterCount;
+
+            SceneManager.LoadScene("Result");
         }
 
         base.Die();

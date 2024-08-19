@@ -34,6 +34,7 @@ public class Monster : MonoBehaviour
 
     public virtual void Die()
     {
+        NoteManager.Instance.monsterCount++;
         Destroy(gameObject);
     }
 

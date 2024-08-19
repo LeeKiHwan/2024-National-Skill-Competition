@@ -35,9 +35,9 @@ public class ItemNote : Note
 
     public override void Update()
     {
-        transform.Translate(Vector3.down * Time.deltaTime * 100);
+        transform.Translate(Vector3.down * Time.deltaTime * 100 * (NoteManager.Instance.timer ? 0.5f : 1));
 
-        if (hitActivate && Input.GetKeyDown(hitKey) || Input.GetKeyDown(otherKey))
+        if (hitActivate && (Input.GetKeyDown(hitKey) || Input.GetKeyDown(otherKey)))
         {
             HitNote();
         }
@@ -62,18 +62,19 @@ public class ItemNote : Note
                 }
                 break;
             case ItemType.Energy:
-                StartCoroutine(NoteManager.Instance.EnergyDouble());
+                NoteManager.Instance.GetItem(0);
                 break;
             case ItemType.Miss:
                 NoteManager.Instance.missDefense += 2;
                 break;
             case ItemType.Timer:
-                StartCoroutine(NoteManager.Instance.Timer());
+                NoteManager.Instance.GetItem(1);
                 break;
             case ItemType.Perfect:
-                StartCoroutine(NoteManager.Instance.Perfect());
+                NoteManager.Instance.GetItem(2);
                 break;
         }
+        NoteManager.Instance.itemCount++;
         Destroy(gameObject);
     }
 }

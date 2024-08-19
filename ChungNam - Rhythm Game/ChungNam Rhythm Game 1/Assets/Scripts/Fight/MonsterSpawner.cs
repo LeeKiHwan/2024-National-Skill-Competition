@@ -63,9 +63,9 @@ public class MonsterSpawner : MonoBehaviour
 
     public IEnumerator MiddleBossSpawn()
     {
-        yield return new WaitForSeconds(20);
-        StartCoroutine(UIManager.Instance.BossSpawnText("중간 보스", 10));
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(1);
+        StartCoroutine(UIManager.Instance.BossSpawnText("중간 보스", 1));
+        yield return new WaitForSeconds(1);
 
         Instantiate(middleBoss, transform.position, Quaternion.identity);
         disableSpawn = true;
@@ -80,9 +80,9 @@ public class MonsterSpawner : MonoBehaviour
 
     public IEnumerator StageBossSpawnCoroutine()
     {
-        yield return new WaitForSeconds(20);
-        StartCoroutine(UIManager.Instance.BossSpawnText("스테이지 보스", 20));
-        yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(1);
+        StartCoroutine(UIManager.Instance.BossSpawnText("스테이지 보스", 1));
+        yield return new WaitForSeconds(1);
 
         Instantiate(stageBoss, transform.position, Quaternion.identity);
         disableSpawn = true;

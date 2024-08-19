@@ -320,9 +320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7aa70bc6352beb42addae303e4d7d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 20
+  hp: 1
   speed: 1
-  addSpeed: 0
   positionType: 1
   isStageBoss: 0
   skillCool: 10

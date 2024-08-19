@@ -27,6 +27,14 @@ public class NoteManager : MonoBehaviour
     public int skyEnergy;
     public bool isDie;
 
+    [Header("Result")]
+    public int score;
+    public float time;
+    public int itemCount;
+    public int noteCount;
+    public float noteSuccess;
+    public int monsterCount;
+
     [Header("item info")]
     public bool energyDouble;
     public int missDefense;
@@ -39,6 +47,11 @@ public class NoteManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Update()
+    {
+        time += Time.deltaTime;
     }
 
     public void AddGroundEnergy(int energy)
@@ -81,7 +94,23 @@ public class NoteManager : MonoBehaviour
         }
     }
 
-    public IEnumerator EnergyDouble()
+    public void GetItem(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                StartCoroutine(EnergyDoubleCo());
+                break;
+            case 1:
+                StartCoroutine(TimerCo());
+                break;
+            case 2:
+                StartCoroutine(PerfectCo());
+                break;
+        }
+    }
+
+    public IEnumerator EnergyDoubleCo()
     {
         energyDouble = true;
         yield return new WaitForSeconds(4);
@@ -90,7 +119,7 @@ public class NoteManager : MonoBehaviour
         yield break;
     }
 
-    public IEnumerator Timer()
+    public IEnumerator TimerCo()
     {
         timer = true;
         yield return new WaitForSeconds(2);
@@ -99,7 +128,7 @@ public class NoteManager : MonoBehaviour
         yield break;
     }
 
-    public IEnumerator Perfect()
+    public IEnumerator PerfectCo()
     {
         perfect = true;
         yield return new WaitForSeconds(5);
