@@ -45,12 +45,12 @@ public class NormalNote : Note
         int hitAccuracy = 100 - (int)Mathf.Abs(rect.anchoredPosition.y);
         int energy = 0;
 
-        if (hitAccuracy >= 75 || NoteManager.Instance.perfect)
+        if (NoteManager.Instance.perfect) hitAccuracy = 100;
+
+        if (hitAccuracy >= 75)
         {
             NoteManager.Instance.combo++;
             energy = 2;
-
-            if (NoteManager.Instance.perfect) hitAccuracy = 100;
         }
         else if (hitAccuracy >= 20)
         {
@@ -69,18 +69,8 @@ public class NormalNote : Note
             NoteManager.Instance.combo = 0;
         }
 
-        switch (noteType)
-        {
-            case NoteType.Normal:
-                energy *= 1;
-                break;
-            case NoteType.Stealth:
-                energy *= 2;
-                break;
-            case NoteType.Size:
-                energy *= 4;
-                break;
-        }
+        if (noteType == NoteType.Stealth) energy *= 2;
+        else if (noteType == NoteType.Size) energy *= 4;
 
         if (notePositionType == PositionType.Ground)
         {
@@ -90,7 +80,7 @@ public class NormalNote : Note
                 NoteManager.Instance.AddSkyEnergy(1);
             }
         }
-        else if (notePositionType == PositionType.Sky)
+        else
         {
             NoteManager.Instance.AddSkyEnergy(energy);
             if (NoteManager.Instance.combo % 2 == 0)

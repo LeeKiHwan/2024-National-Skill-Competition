@@ -31,11 +31,6 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
-    {
-        PlayerPrefs.Save();
-    }
-
     public void Quit()
     {
         Application.Quit();

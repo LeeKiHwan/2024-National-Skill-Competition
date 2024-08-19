@@ -47,7 +47,7 @@ public abstract class Note : MonoBehaviour
 
     public abstract void HitNote();
 
-    public virtual void HideNote()
+    public void HideNote()
     {
         Image image = GetComponent<Image>();
         image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - Time.deltaTime * 5);
