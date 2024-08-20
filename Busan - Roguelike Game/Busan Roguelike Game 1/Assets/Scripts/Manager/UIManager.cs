@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
         playerMp.fillAmount = Mathf.Lerp(playerMp.fillAmount, AttackManager.Instance.mp / AttackManager.Instance.maxMp, Time.deltaTime);
         playerXp.fillAmount = Mathf.Lerp(playerXp.fillAmount, AttackManager.Instance.xp / AttackManager.Instance.maxXp, Time.deltaTime);
 
-        foreach(Image skill in skill)
+        foreach (Image skill in skill)
         {
             skill.fillAmount = AttackManager.Instance.skillCur / AttackManager.Instance.skillCool;
         }
@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour
 
         List<int> rands = new List<int>();
 
-        for (int i=0; i<3; i++)
+        for (int i = 0; i < 3; i++)
         {
             int rand = Random.Range(0, attackPattern.Length);
 
@@ -58,8 +58,36 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SelectPattern()
+    public void SelectPattern(AttackPattern attackPattern)
     {
+        switch (attackPattern)
+        {
+            case AttackPattern.FireArea:
+                AttackManager.Instance.fireAreaLevel++;
+                break;
+            case AttackPattern.FireBreath:
+                AttackManager.Instance.fireBreathLevel++;
+                break;
+            case AttackPattern.Lightning:
+                AttackManager.Instance.lightningLevel++;
+                break; ;
+            case AttackPattern.Laser:
+                AttackManager.Instance.laserLevel++;
+                break;
+            case AttackPattern.AutoAttack:
+                AttackManager.Instance.AutoAttack();
+                break;
+        }
 
+        Time.timeScale = 1;
     }
+}
+
+public enum AttackPattern
+{
+    FireArea,
+    FireBreath,
+    Lightning,
+    Laser,
+    AutoAttack
 }

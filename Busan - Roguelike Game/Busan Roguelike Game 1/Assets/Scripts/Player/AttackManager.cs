@@ -36,10 +36,10 @@ public class AttackManager : MonoBehaviour
     public int lightningLevel;
     public GameObject lightning;
 
-    public GameObject autoAttack;
-
     public int laserLevel;
     public GameObject laser;
+
+    public GameObject autoAttack;
 
     public bool die;
 
@@ -54,6 +54,14 @@ public class AttackManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        StartCoroutine(FireArea());
+        StartCoroutine(FireBreath());
+        StartCoroutine(Lightning());
+        StartCoroutine(Laser());
     }
 
     private void Update()
@@ -103,5 +111,66 @@ public class AttackManager : MonoBehaviour
 
 
         yield break;
+    }
+
+    public IEnumerator FireArea()
+    {
+        while (true)
+        {
+            if (fireAreaLevel > 0)
+            {
+                Instantiate(fireArea, Player.Instance.transform);
+                yield return new WaitForSeconds(10 / fireAreaLevel);
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    public IEnumerator FireBreath()
+    {
+        while (true)
+        {
+            if (fireBreathLevel > 0)
+            {
+                Instantiate(fireBreath, Player.Instance.transform);
+                yield return new WaitForSeconds(10 / fireBreathLevel);
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    public IEnumerator Lightning()
+    {
+        while (true)
+        {
+            if (lightningLevel > 0)
+            {
+                Instantiate(lightning, Player.Instance.transform);
+                yield return new WaitForSeconds(10 / lightningLevel);
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    public IEnumerator Laser()
+    {
+        while (true)
+        {
+            if (laserLevel > 0)
+            {
+                Instantiate(laser, Player.Instance.transform);
+                yield return new WaitForSeconds(10 /  laserLevel);
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    public void AutoAttack()
+    {
+        Instantiate(autoAttack, Player.Instance.transform);
     }
 }

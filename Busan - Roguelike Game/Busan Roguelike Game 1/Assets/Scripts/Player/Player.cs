@@ -7,12 +7,14 @@ public class Player : MonoBehaviour
     public static Player Instance;
 
     public Rigidbody rb;
+    public Animator anim;
 
     private void Awake()
     {
         Instance = this;
 
         rb = GetComponent<Rigidbody>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -27,6 +29,8 @@ public class Player : MonoBehaviour
         float z = Input.GetAxisRaw("Vertical") * AttackManager.Instance.speed;
 
         rb.velocity = new Vector3(x,0,z);
+
+        anim.SetBool("IsMove", Mathf.Abs(x) > 0 || Mathf.Abs(z) > 0);
     }
 
     public void Rotate()
