@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealMonster : MonoBehaviour
+public class HealMonster : Monster
 {
     public float heal;
     public float healSpeed;

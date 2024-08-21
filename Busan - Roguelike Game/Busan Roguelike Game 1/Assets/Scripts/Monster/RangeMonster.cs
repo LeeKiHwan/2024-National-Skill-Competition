@@ -16,16 +16,24 @@ public class RangeMonster : Monster
     {
         while (true)
         {
-            Collider[] player = Physics.OverlapSphere(transform.position, 5, LayerMask.GetMask("Player"));
-            if (player.Length > 0)
-            {
-                GameObject b = Instantiate(bullet, transform.position, Quaternion.identity);
-                b.transform.forward = transform.forward;
-                b.GetComponent<Rigidbody>().AddForce(transform.forward * 5, ForceMode.VelocityChange);
+            //Collider[] player = Physics.OverlapSphere(transform.position, 10, LayerMask.GetMask("Player"));
+            //if (player.Length > 0)
+            //{
+            //    Instantiate(bullet, transform.position + new Vector3(0, 0.5f), Quaternion.identity)
+            //        .GetComponent<Bullet>().SetBullet(transform.forward, damage, speed * 5, BulletType.Monster);
+            //    yield return new WaitForSeconds(attackSpeed);
+            //}
+            //yield return new WaitForSeconds(0.1f);
 
-                yield return new WaitForSeconds(attackSpeed);
-            }
-            yield return new WaitForSeconds(0.1f);
+            Instantiate(bullet, transform.position + new Vector3(0, 0.5f), Quaternion.identity)
+                    .GetComponent<Bullet>().SetBullet(transform.forward, damage, speed * 5, BulletType.Monster);
+            yield return new WaitForSeconds(attackSpeed);
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, 10);
     }
 }

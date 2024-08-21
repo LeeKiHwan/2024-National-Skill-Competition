@@ -17,6 +17,7 @@ public class AttackManager : MonoBehaviour
     public float xp;
 
     [Space()]
+    public GameObject attackBullet;
     public float attackDamage;
     public float attackSpeed;
 
@@ -58,6 +59,7 @@ public class AttackManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(Attack());
         StartCoroutine(FireArea());
         StartCoroutine(FireBreath());
         StartCoroutine(Lightning());
@@ -66,7 +68,7 @@ public class AttackManager : MonoBehaviour
 
     private void Update()
     {
-        skillCur -= Time.deltaTime;
+        UseSkill();
     }
 
     public void TakeDamage(float damage)
@@ -85,7 +87,12 @@ public class AttackManager : MonoBehaviour
     {
         this.xp = Mathf.Min(this.xp + xp, maxXp);
 
-        if (xp >= maxXp) UIManager.Instance.ShowAttackPattern();
+        if (this.xp >= maxXp)
+        {
+            maxXp *= 1.15f;
+            this.xp = 0;
+            UIManager.Instance.ShowAttackPattern();
+        }
     }
 
     public void IncreaseSpeed(float speed)
@@ -101,6 +108,28 @@ public class AttackManager : MonoBehaviour
         }
     }
 
+    public void UseSkill()
+    {
+        skillCur -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) && skillCur <= 0)
+        {
+            skillCur = skillCool;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) && skillCur <= 0)
+        {
+            skillCur = skillCool;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3) && skillCur <= 0)
+        {
+            skillCur = skillCool;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4) && skillCur <= 0)
+        {
+            skillCur = skillCool;
+        }
+    }
+
     public void Curse()
     {
         
@@ -111,6 +140,21 @@ public class AttackManager : MonoBehaviour
 
 
         yield break;
+    }
+
+    public IEnumerator Attack()
+    {
+        while (true)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Instantiate(attackBullet, Player.Instance.transform.position + new Vector3(0,0.5f), Quaternion.identity).
+                    GetComponent<Bullet>().SetBullet(Player.Instance.transform.forward, attackDamage, 25, BulletType.Player);
+                yield return new WaitForSeconds(1 / attackSpeed);
+            }
+
+            yield return null;
+        }
     }
 
     public IEnumerator FireArea()

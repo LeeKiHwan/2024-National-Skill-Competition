@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TeleportMonster : MonoBehaviour
+public class TeleportMonster : Monster
 {
     public float teleportCool;
 

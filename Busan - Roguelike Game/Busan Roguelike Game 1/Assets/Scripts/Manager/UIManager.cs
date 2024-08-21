@@ -25,9 +25,9 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        playerHp.fillAmount = Mathf.Lerp(playerHp.fillAmount, AttackManager.Instance.hp / AttackManager.Instance.maxHp, Time.deltaTime);
-        playerMp.fillAmount = Mathf.Lerp(playerMp.fillAmount, AttackManager.Instance.mp / AttackManager.Instance.maxMp, Time.deltaTime);
-        playerXp.fillAmount = Mathf.Lerp(playerXp.fillAmount, AttackManager.Instance.xp / AttackManager.Instance.maxXp, Time.deltaTime);
+        playerHp.fillAmount = Mathf.Lerp(playerHp.fillAmount, AttackManager.Instance.hp / AttackManager.Instance.maxHp, Time.deltaTime * 10);
+        playerMp.fillAmount = Mathf.Lerp(playerMp.fillAmount, AttackManager.Instance.mp / AttackManager.Instance.maxMp, Time.deltaTime * 10);
+        playerXp.fillAmount = Mathf.Lerp(playerXp.fillAmount, AttackManager.Instance.xp / AttackManager.Instance.maxXp, Time.deltaTime * 10);
 
         foreach (Image skill in skill)
         {
@@ -58,25 +58,30 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SelectPattern(AttackPattern attackPattern)
+    public void SelectPattern(int attackPattern)
     {
         switch (attackPattern)
         {
-            case AttackPattern.FireArea:
+            case 0:
                 AttackManager.Instance.fireAreaLevel++;
                 break;
-            case AttackPattern.FireBreath:
+            case 1:
                 AttackManager.Instance.fireBreathLevel++;
                 break;
-            case AttackPattern.Lightning:
+            case 2:
                 AttackManager.Instance.lightningLevel++;
                 break; ;
-            case AttackPattern.Laser:
+            case 3:
                 AttackManager.Instance.laserLevel++;
                 break;
-            case AttackPattern.AutoAttack:
+            case 4:
                 AttackManager.Instance.AutoAttack();
                 break;
+        }
+
+        for (int i=0; i<this.attackPattern.Length; i++)
+        {
+            this.attackPattern[i].SetActive(false);
         }
 
         Time.timeScale = 1;
