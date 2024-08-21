@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        Destroy(gameObject, 1.5f);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        transform.position = Player.Instance.transform.position;
+        transform.forward = Player.Instance.transform.forward;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Monster"))
+        {
+            other.GetComponent<Monster>().TakeDamage(Time.deltaTime * 20);
+        }
     }
 }

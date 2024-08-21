@@ -14,7 +14,19 @@ public class MonsterSpawner : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(SpawnMonster());
-        StartCoroutine(SpawnBoss());
+        //StartCoroutine(SpawnBoss());
+        StartCoroutine(SpawnCool());
+    }
+
+    public IEnumerator SpawnCool()
+    {
+        spawnCool = 10;
+        yield return new WaitForSeconds(30);
+        spawnCool = 7;
+        yield return new WaitForSeconds(30);
+        spawnCool = 4;
+        yield return new WaitForSeconds(30);
+        spawnCool = 1;
     }
 
     public IEnumerator SpawnMonster()

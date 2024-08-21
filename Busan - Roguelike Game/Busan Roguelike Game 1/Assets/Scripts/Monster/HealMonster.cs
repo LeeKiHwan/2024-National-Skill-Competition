@@ -29,4 +29,10 @@ public class HealMonster : Monster
             yield return new WaitForSeconds(healSpeed);
         }
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 5);
+    }
 }

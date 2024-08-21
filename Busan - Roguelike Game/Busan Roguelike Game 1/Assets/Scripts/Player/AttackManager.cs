@@ -163,7 +163,7 @@ public class AttackManager : MonoBehaviour
         {
             if (fireAreaLevel > 0)
             {
-                Instantiate(fireArea, Player.Instance.transform);
+                Instantiate(fireArea, Player.Instance.transform.position, Quaternion.identity);
                 yield return new WaitForSeconds(10 / fireAreaLevel);
             }
 
@@ -177,7 +177,7 @@ public class AttackManager : MonoBehaviour
         {
             if (fireBreathLevel > 0)
             {
-                Instantiate(fireBreath, Player.Instance.transform);
+                Instantiate(fireBreath, Player.Instance.transform.position, Quaternion.identity);
                 yield return new WaitForSeconds(10 / fireBreathLevel);
             }
 
@@ -191,7 +191,7 @@ public class AttackManager : MonoBehaviour
         {
             if (lightningLevel > 0)
             {
-                Instantiate(lightning, Player.Instance.transform);
+                Instantiate(lightning, Player.Instance.transform.position, Quaternion.identity);
                 yield return new WaitForSeconds(10 / lightningLevel);
             }
 
