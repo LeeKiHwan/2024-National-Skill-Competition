@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class Boss : Monster
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator Attack()
     {
-        
+        while (hp > 0)
+        {
+
+        }
+
+        yield break;
     }
 }

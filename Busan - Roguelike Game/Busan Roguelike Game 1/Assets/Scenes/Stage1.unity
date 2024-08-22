@@ -294,7 +294,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b7e6faaf179869f42b9ccb67c1f1c309, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d07e8dcebc14ebe40bd931fc2f08328b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -414,6 +414,7 @@ MonoBehaviour:
   speed: 5
   skillCool: 10
   skillCur: 0
+  teleportEffect: {fileID: 6931185431224533856, guid: 6ce4cd5c5954872498fb0387bb2bce8c, type: 3}
   fireAreaLevel: 0
   fireArea: {fileID: 3397319532593777856, guid: 72ed04e1dc1185347a063552ed9e04de, type: 3}
   fireBreathLevel: 0
@@ -4878,6 +4879,7 @@ MonoBehaviour:
   - {fileID: 2185883701851117724, guid: 39ecd843ccf082642a91c6708108f3e3, type: 3}
   - {fileID: 6124568968120843016, guid: 5186fbfec2a8b634a8abb31a1359356d, type: 3}
   - {fileID: 54529920831425588, guid: 9bcd36b4e871bad4d8ed0356b4039cd9, type: 3}
+  - {fileID: 4894235883909434706, guid: 0511a8dd4cbc6cf4c8805c426b870b34, type: 3}
   spawnCool: 10
   boss: {fileID: 0}
   bossCool: 120

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TeleportMonster : Monster
 {
+    public GameObject teleportEffect;
     public float teleportCool;
 
     private void Awake()
@@ -15,16 +16,26 @@ public class TeleportMonster : Monster
     {
         while (true)
         {
-            Collider[] player = Physics.OverlapSphere(transform.position, 5, LayerMask.GetMask("Player"));
+            Collider[] player = Physics.OverlapSphere(transform.position, 10);
 
-            if (player.Length > 0)
+            foreach(Collider collider in player)
             {
-                transform.position = player[0].transform.position + -player[0].transform.forward;
+                if (collider != null && collider.CompareTag("Player"))
+                {
+                    transform.position = collider.transform.position + (-collider.transform.forward * 2);
+                    Destroy(Instantiate(teleportEffect, transform.position, Quaternion.identity), 3);
 
-                yield return new WaitForSeconds(teleportCool);
+                    yield return new WaitForSeconds(teleportCool);
+                }
             }
 
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 10);
     }
 }

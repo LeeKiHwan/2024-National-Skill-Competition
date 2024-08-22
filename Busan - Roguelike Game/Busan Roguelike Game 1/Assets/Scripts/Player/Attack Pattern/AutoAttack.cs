@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AutoAttack : MonoBehaviour
@@ -26,7 +27,8 @@ public class AutoAttack : MonoBehaviour
     {
         while (true)
         {
-            Collider[] monsters = Physics.OverlapSphere(Player.Instance.transform.position, 25);
+            Collider[] monsters = Physics.OverlapSphere(Player.Instance.transform.position, 25).
+                ToList().OrderBy(i => Vector3.Distance(transform.position, i.transform.position)).ToArray();
 
             foreach (Collider monster in monsters)
             {
@@ -35,9 +37,9 @@ public class AutoAttack : MonoBehaviour
                     Vector3 fwd = monster.transform.position - transform.position;
 
                     Instantiate(bullet, transform.position, Quaternion.identity).
-                        GetComponent<Bullet>().SetBullet(fwd.normalized, 10, 10, BulletType.Player);
+                        GetComponent<Bullet>().SetBullet(fwd.normalized, 30, 20, BulletType.Player);
 
-                    yield return new WaitForSeconds(2);
+                    yield return new WaitForSeconds(1.5f);
 
                     break;
                 }

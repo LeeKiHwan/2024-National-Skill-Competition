@@ -28,6 +28,9 @@ public class AttackManager : MonoBehaviour
     public float skillCur;
 
     [Space()]
+    public GameObject teleportEffect;
+
+    [Space()]
     public int fireAreaLevel;
     public GameObject fireArea;
 
@@ -114,10 +117,21 @@ public class AttackManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1) && skillCur <= 0)
         {
+            for (int i=0; i < 10; i++)
+            {
+                Vector3 fwd = Player.Instance.transform.forward + new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f));
+
+                Instantiate(attackBullet, Player.Instance.transform.position + new Vector3(0, 0.5f), Quaternion.identity).
+                        GetComponent<Bullet>().SetBullet(fwd, attackDamage, 25, BulletType.Player);
+            }
+
             skillCur = skillCool;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && skillCur <= 0)
         {
+            Player.Instance.transform.Translate(Vector3.forward * 5);
+            Destroy(Instantiate(teleportEffect, Player.Instance.transform.position, Quaternion.identity), 3);
+
             skillCur = skillCool;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && skillCur <= 0)
@@ -146,14 +160,10 @@ public class AttackManager : MonoBehaviour
     {
         while (true)
         {
-            if (Input.GetMouseButton(0))
-            {
-                Instantiate(attackBullet, Player.Instance.transform.position + new Vector3(0,0.5f), Quaternion.identity).
+            Instantiate(attackBullet, Player.Instance.transform.position + new Vector3(0, 0.5f), Quaternion.identity).
                     GetComponent<Bullet>().SetBullet(Player.Instance.transform.forward, attackDamage, 25, BulletType.Player);
-                yield return new WaitForSeconds(1 / attackSpeed);
-            }
 
-            yield return null;
+            yield return new WaitForSeconds(1 / attackSpeed);
         }
     }
 
