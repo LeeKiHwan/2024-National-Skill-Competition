@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class EndGameManager : MonoBehaviour
 {
-    public TextMeshProUGUI rankText;
+    public TextMeshProUGUI[] rankText;
     public TextMeshProUGUI scoreText;
 
     public GameObject menuBtn;
@@ -31,7 +31,7 @@ public class EndGameManager : MonoBehaviour
     {
         for (int i=0; i<RankManager.Instance.rank.Count; i++)
         {
-            rankText.text = $"{i + 1}    {RankManager.Instance.rank[i].Name}    {RankManager.Instance.rank[i].Score}P";
+            rankText[i].text = $"{i + 1}    {RankManager.Instance.rank[i].Name}    {RankManager.Instance.rank[i].Score}P";
         }
     }
 

@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public TextMeshProUGUI rankText;
+    public TextMeshProUGUI[] rankText;
 
     private void Start()
     {
         for (int i = 0; i < RankManager.Instance.rank.Count; i++)
         {
-            rankText.text = $"{i + 1}    {RankManager.Instance.rank[i].Name}    {RankManager.Instance.rank[i].Score}P";
+            rankText[i].text = $"{i + 1}    {RankManager.Instance.rank[i].Name}    {RankManager.Instance.rank[i].Score}P";
         }
     }
 

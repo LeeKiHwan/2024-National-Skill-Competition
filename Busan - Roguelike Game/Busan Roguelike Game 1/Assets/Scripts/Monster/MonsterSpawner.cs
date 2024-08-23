@@ -14,7 +14,7 @@ public class MonsterSpawner : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(SpawnMonster());
-        //StartCoroutine(SpawnBoss());
+        StartCoroutine(SpawnBoss());
         StartCoroutine(SpawnCool());
     }
 

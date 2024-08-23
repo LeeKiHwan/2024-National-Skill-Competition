@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AttackManager : MonoBehaviour
 {
@@ -27,6 +28,10 @@ public class AttackManager : MonoBehaviour
     public float skillCool;
     public float skillCur;
 
+    public GameObject invcEffect;
+    public bool isInvc;
+    public bool isCurse;
+
     [Space()]
     public GameObject teleportEffect;
 
@@ -45,8 +50,6 @@ public class AttackManager : MonoBehaviour
 
     public GameObject autoAttack;
 
-    public bool die;
-
     private void Awake()
     {
         if (Instance == null)
@@ -56,6 +59,9 @@ public class AttackManager : MonoBehaviour
         }
         else
         {
+            Instance.hp = maxHp;
+            Instance.maxMp = maxMp;
+
             Destroy(gameObject);
         }
     }
@@ -67,6 +73,7 @@ public class AttackManager : MonoBehaviour
         StartCoroutine(FireBreath());
         StartCoroutine(Lightning());
         StartCoroutine(Laser());
+        StartCoroutine(GetMp());
     }
 
     private void Update()
@@ -76,14 +83,20 @@ public class AttackManager : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (isInvc) return;
+
         hp = Mathf.Min(hp - damage, maxHp);
 
         if (hp <= 0) Die();
     }
 
-    public void TakeMp(float mp)
+    public IEnumerator GetMp()
     {
-        this.mp = Mathf.Min(this.mp + mp, maxMp);
+        while (true)
+        {
+            mp = Mathf.Min(mp + Time.deltaTime, maxMp);
+            yield return null;
+        }
     }
 
     public void TakeXp(float xp)
@@ -105,17 +118,16 @@ public class AttackManager : MonoBehaviour
 
     public void Die()
     {
-        if (!die)
-        {
-            die = true;
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void UseSkill()
     {
         skillCur -= Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && skillCur <= 0)
+        if (isCurse) return;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) && skillCur <= 0 && mp >= 30)
         {
             for (int i=0; i < 10; i++)
             {
@@ -125,33 +137,50 @@ public class AttackManager : MonoBehaviour
                         GetComponent<Bullet>().SetBullet(fwd, attackDamage, 25, BulletType.Player);
             }
 
+            mp -= 30;
             skillCur = skillCool;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && skillCur <= 0)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && skillCur <= 0 && mp >= 20)
         {
             Player.Instance.transform.Translate(Vector3.forward * 5);
             Destroy(Instantiate(teleportEffect, Player.Instance.transform.position, Quaternion.identity), 3);
 
+            mp -= 20;
             skillCur = skillCool;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && skillCur <= 0)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && skillCur <= 0 && mp >= 20)
         {
+            StartCoroutine(AttackSpeedUp());
+            mp -= 20;
             skillCur = skillCool;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4) && skillCur <= 0)
+        if (Input.GetKeyDown(KeyCode.Alpha4) && skillCur <= 0 && mp >= 30)
         {
+            TakeDamage(-10);
+            mp -= 30;
             skillCur = skillCool;
         }
+    }
+
+    public IEnumerator AttackSpeedUp()
+    {
+        attackSpeed += 5;
+        yield return new WaitForSeconds(3);
+        attackSpeed -= 5;
+
+        yield break;
     }
 
     public void Curse()
     {
-        
+        StartCoroutine(CurseCoroutine());
     }
 
     public IEnumerator CurseCoroutine()
     {
-
+        isCurse = true;
+        yield return new WaitForSeconds(2);
+        isCurse = false;
 
         yield break;
     }

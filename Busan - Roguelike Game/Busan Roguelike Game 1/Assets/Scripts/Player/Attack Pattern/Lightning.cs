@@ -14,7 +14,7 @@ public class Lightning : MonoBehaviour
             float z = Random.Range(-10, 10);
             Vector3 spawnPos = transform.position + new Vector3(x, 0, z);
 
-            Destroy(Instantiate(lightningEffect, spawnPos, Quaternion.identity), 2);
+            Destroy(Instantiate(lightningEffect, spawnPos, Quaternion.identity), 1);
             Collider[] monsters = Physics.OverlapSphere(spawnPos, 2);
             foreach(Collider monster in monsters)
             {

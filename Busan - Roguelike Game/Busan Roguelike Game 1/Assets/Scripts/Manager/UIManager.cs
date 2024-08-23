@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
 
     public GameObject[] attackPattern;
 
+    public GameObject monsterCheatUI;
+
     private void Awake()
     {
         Instance = this;
