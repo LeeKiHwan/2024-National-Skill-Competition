@@ -478,7 +478,7 @@ MonoBehaviour:
   attackSpeed: 1
   maxSpeed: 10
   speed: 5
-  skillCool: 10
+  skillCool: 4
   skillCur: 0
   invcEffect: {fileID: 1953519154}
   isInvc: 0
