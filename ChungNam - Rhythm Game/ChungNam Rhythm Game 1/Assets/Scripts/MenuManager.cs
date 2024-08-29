@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,9 +10,33 @@ public class MenuManager : MonoBehaviour
     public TextMeshProUGUI[] stage1RankText;
     public TextMeshProUGUI[] stage2RankText;
 
+    public KeyCode GroundLeft;
+    public KeyCode GroundLeftCenter;
+    public KeyCode GroundRightCenter;
+    public KeyCode GroundRight;
+
     private void Start()
     {
         ShowRank();
+
+        GroundLeft = KeyCode.A;
+        GroundLeftCenter = KeyCode.S;
+        GroundRightCenter = KeyCode.D;
+        GroundRight = KeyCode.F;
+    }
+
+    private void Update()
+    {
+        foreach(KeyCode inputKey in Enum.GetValues(typeof(KeyCode)))
+        {
+            if (inputKey.ToString().Length == 1 && inputKey.ToString()[0] >= 65 && inputKey.ToString()[0] <= 90 && Input.GetKeyDown(inputKey))
+            {
+                if (inputKey != GroundLeft && inputKey != GroundLeftCenter && inputKey != GroundRightCenter && inputKey != GroundRight)
+                {
+                    Debug.Log(inputKey);
+                }
+            }
+        }
     }
 
     public void StageStart(int stage)

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ItemNote : Note
 {
-    public KeyCode otherKey;
     public ItemType itemType;
 
     public override void Start()
@@ -30,20 +29,6 @@ public class ItemNote : Note
         {
             hitKey = NoteManager.Instance.rightGround;
             otherKey = NoteManager.Instance.rightSky;
-        }
-    }
-
-    public override void Update()
-    {
-        transform.Translate(Vector3.down * Time.deltaTime * 100 * (NoteManager.Instance.timer ? 0.5f : 1));
-
-        if (hitActivate && (Input.GetKeyDown(hitKey) || Input.GetKeyDown(otherKey)))
-        {
-            HitNote();
-        }
-        if (NoteManager.Instance.ghostSkill && rect.anchoredPosition.y < 150)
-        {
-            HideNote();
         }
     }
 

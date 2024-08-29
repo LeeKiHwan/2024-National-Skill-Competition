@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +30,10 @@ public class UIManager : MonoBehaviour
     public GameObject spawnText;
     public Text bossSpawnText;
 
+    public Transform hitEffect;
+    public Transform eventUi;
+    public float time;
+
     private void Awake()
     {
         Instance = this;
@@ -38,6 +44,28 @@ public class UIManager : MonoBehaviour
         hpImage.fillAmount = Mathf.Lerp(hpImage.fillAmount, NoteManager.Instance.hp / 100f, Time.deltaTime * 10);
         groundEnergyImage.fillAmount = Mathf.Lerp(groundEnergyImage.fillAmount, NoteManager.Instance.groundEnergy / 100f, Time.deltaTime * 10);
         skyEnergyImage.fillAmount = Mathf.Lerp(skyEnergyImage.fillAmount, NoteManager.Instance.skyEnergy / 100f, Time.deltaTime * 10);
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.H))
+        {
+            hitEffect.localScale = Vector3.one;
+        }
+        hitEffect.localScale = Vector3.MoveTowards(hitEffect.localScale, Vector3.zero, Time.deltaTime * 5);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            eventUi.localScale = new Vector3(1, 0);
+            time = 1;
+        }
+
+        if (time > 0)
+        {
+            eventUi.localScale = Vector3.MoveTowards(eventUi.localScale, new Vector3(1, 1), Time.deltaTime * 5);
+            time -= Time.deltaTime;
+        }
+        else
+        {
+            eventUi.localScale = Vector3.MoveTowards(eventUi.localScale, new Vector3(1,0), Time.deltaTime * 5);
+        }
     }
 
     public void UpdateNoteUI(int hitAccuracy)

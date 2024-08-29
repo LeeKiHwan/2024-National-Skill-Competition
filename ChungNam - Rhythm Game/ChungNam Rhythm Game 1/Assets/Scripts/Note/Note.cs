@@ -7,6 +7,7 @@ public abstract class Note : MonoBehaviour
 {
     public NoteXPosition noteXPosition;
     public KeyCode hitKey;
+    public KeyCode otherKey;
     public bool hitActivate;
     public RectTransform rect;
 
@@ -33,9 +34,9 @@ public abstract class Note : MonoBehaviour
 
     public virtual void Update()
     {
-        transform.Translate(Vector3.down * Time.deltaTime * 100 *  (NoteManager.Instance.timer ? 0.5f : 1)) ;
+        transform.Translate(Vector3.down * Time.deltaTime * 200 *  (NoteManager.Instance.timer ? 0.5f : 1)) ;
 
-        if (hitActivate && Input.GetKeyDown(hitKey))
+        if (hitActivate && (Input.GetKeyDown(hitKey) || Input.GetKeyDown(otherKey)))
         {
             HitNote();
         }
